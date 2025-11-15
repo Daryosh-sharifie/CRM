@@ -1,11 +1,12 @@
 import React, { useState, useEffect, FormEvent, ChangeEvent } from "react";
 import { Eye, EyeOff } from "lucide-react"; // npm i lucide-react
+import Dashboard from "./Dashboard";
 
 // ----- Demo users (for development only) -----
 type DevUser = { email: string; pass: string; name: string };
 
 const DEV_USERS: DevUser[] = [
-  { email: "demo@example.com",  pass: "password123", name: "Demo User" },
+  { email: "demo@example.com",  pass: "pass1234", name: "Demo User" },
   { email: "admin@example.com", pass: "admin12345",  name: "Admin User" },
   { email: "guest@example.com", pass: "guest12345",  name: "Guest User" },
 ];
@@ -219,37 +220,12 @@ export default function App() {
 
   // Dashboard
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-6">
-      <header className="flex items-center justify-between mb-6">
-        <div>
-          <h1 className="text-2xl font-bold">Dashboard</h1>
-          <p className="text-gray-400 text-sm">Welcome, {user.email}</p>
-        </div>
-        <div className="flex items-center gap-3">
-          <span className="text-sm text-gray-400">
-            Token expires in: <b>{secondsLeft}s</b>
-          </span>
-          <button onClick={handleLogout} className="bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded">
-            Logout
-          </button>
-        </div>
-      </header>
+  <Dashboard
+    userEmail={user.email}
+    secondsLeft={secondsLeft}
+    onLogout={handleLogout}
+  />
 
-      {/* Token (uncomment if you want to inspect) */}
-      {/* <section className="bg-gray-800 p-4 rounded-xl mb-6">
-        <h2 className="text-lg text-center font-semibold mb-2">Token Info</h2>
-        <pre className="bg-gray-900 p-3 rounded overflow-auto text-sm">
-          {JSON.stringify(token, null, 2)}
-        </pre>
-      </section> */}
-
-      {/* Demo dashboard content */}
-      <section className="bg-gray-800 p-4 rounded-xl">
-        <h2 className="text-lg font-semibold mb-2">Clients</h2>
-        <h2 className="text-lg font-semibold mb-2">Quotes</h2>
-        <h2 className="text-lg font-semibold mb-2">Invoices</h2>
-        <h2 className="text-lg font-semibold mb-2">Projects</h2>
-      </section>
-    </div>
-  );
+  
+);
 }
